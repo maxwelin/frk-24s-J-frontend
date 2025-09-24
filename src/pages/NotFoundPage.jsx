@@ -1,6 +1,11 @@
+import { Link } from "react-router"
+
 const NotFoundPage = () => {
   return (
-    <div>404</div>
+    <>
+      <h1>404</h1>
+      <Link to={"/"}>Home</Link>
+    </>
   )
 }
 
