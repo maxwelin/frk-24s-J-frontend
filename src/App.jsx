@@ -1,11 +1,13 @@
+import './index.css'
+import HomePage from './pages/HomePage'
+
+
 function App() {
-  return (
-    <>
-      <div className="w-full flex place-content-center">
-        <h1 className="text-5xl">Hello world</h1>
-      </div>
-    </>
-  )
+    return (
+        <>
+        <HomePage />
+        </>
+    )
 }
 
 export default App
