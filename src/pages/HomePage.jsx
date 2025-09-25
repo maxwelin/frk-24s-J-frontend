@@ -1,4 +1,4 @@
-import { Board } from "gumoku-component";
+import { Menu, Board } from "gumoku-component";
 
 
 export default function HomePage() {
@@ -7,7 +7,11 @@ export default function HomePage() {
 
     return (
         <div>
-            <Board />
+            <Board boardTiles={80}>
+
+            <Menu className="menuOverlay"/>
+
+            </Board>
         </div>
     )
 }
