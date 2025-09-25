@@ -1,4 +1,4 @@
-import {createContext, useContext, useState} from "react";
+import {createContext, useState} from "react";
 
 const MainContext = createContext(null);
 
@@ -11,11 +11,4 @@ export function MainProvider({children}){
         </MainContext.Provider>
     )
     
-}
-
-export function useMainContext() {
-    const ctx = useContext(MainContext);
-    if (!ctx) throw new Error("useMainContext must be used inside MainProvider")
-        
-    return ctx;
 }
