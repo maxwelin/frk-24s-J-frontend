@@ -2,7 +2,7 @@ import {createContext, useState} from "react";
 
 const MainContext = createContext(null);
 
-export function MainProvider({children}){
+function MainProvider({children}){
     const [value, setValue] = useState("Hello Gumoku")
 
     return(
@@ -12,3 +12,5 @@ export function MainProvider({children}){
     )
     
 }
+
+export { MainContext, MainProvider };
