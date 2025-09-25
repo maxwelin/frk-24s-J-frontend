@@ -1,5 +1,5 @@
 import { Menu, Board } from "gumoku-component";
-
+import "./HomePage.css"
 
 export default function HomePage() {
 
