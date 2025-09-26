@@ -3,4 +3,5 @@ export const gameConfig = {
   gameStarted: true,
   largeMenu: true,
   gameEnded: false,
+  className: "",
 };
