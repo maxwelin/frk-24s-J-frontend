@@ -1,23 +1,21 @@
-import { Menu, Board } from "gumoku-component";
+import { Board } from "gumoku-component";
+import { useState } from "react";
 import "./HomePage.css";
 import { useMainContext } from "../hooks/useMainContext";
 
 export default function HomePage() {
-  const { value, setValue } = useMainContext();
+  const { handleCellClick } = useMainContext();
 
   return (
-    <div>
-      <button onClick={() => setValue("Good Bye")} className="test">
-        Test
-      </button>
-      <p>
-        This is sent from a provider:{" "}
-        <span style={{ fontSize: "30px" }}>{value}</span>
-      </p>
-
-      <Board boardTiles={80}>
-        <Menu className="menuOverlay" />
-      </Board>
+    <div onClick={handleCellClick}>
+      <Board
+        boardTiles={80}
+        gameStarted={true}
+        playerOrder={"Player 1"}
+        largeMenu={false}
+        gameEnded={false}
+        handleCellClick={handleCellClick}
+      />
     </div>
   );
 }

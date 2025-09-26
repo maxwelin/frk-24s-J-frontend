@@ -1,16 +1,21 @@
-import {createContext, useState} from "react";
+import { createContext, useEffect, useState, useMemo } from "react";
 
 const MainContext = createContext(null);
 
-function MainProvider({children}){
-    const [value, setValue] = useState("Hello Gumoku")
+function MainProvider({ children }) {
+  const [playerTurn, setPlayerTurn] = useState(1);
 
-    return(
-        <MainContext.Provider value={{value, setValue}}>
-            {children}
-        </MainContext.Provider>
-    )
-    
+  const currentColor = playerTurn === 1 ? "black" : "white";
+
+  const handleCellClick = () => {
+    setPlayerTurn((turn) => (turn === 1 ? 2 : 1));
+  };
+
+  return (
+    <MainContext.Provider value={{ handleCellClick, currentColor }}>
+      {children}
+    </MainContext.Provider>
+  );
 }
 
 export { MainContext, MainProvider };
