@@ -1,14 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 
-const BASE = "http://localhost:3001";
+const BASE = "http://localhost:3001/api/gomoku";
 
 export function useGame() {
   const [games, setGames] = useState(null);
+  const [creating, setCreating] = useState(false);
 
-  const fetchGames = useCallback(async (ctrl) => {
+  const fetchGames = useCallback(async () => {
     try {
-      const res = await fetch(`${BASE}/api/gomoku/games`, {
-        signal: ctrl.signal,
+      const res = await fetch(`${BASE}/games`, {
         method: "GET",
       });
       const data = await res.json();
@@ -19,20 +19,43 @@ export function useGame() {
     }
   }, []);
 
+  const findGame = useCallback(async (gameId) => {
+    if (!gameId) throw new Error("findGame: missing gameId");
+    const res = await fetch(`${BASE}/game/${encodeURIComponent(gameId)}`);
+
+    if (!res.ok) throw new Error(`${res.status}`);
+
+    return res.json();
+  }, []);
+
+  const createGame = useCallback(async () => {
+    try {
+      setCreating(true);
+      const res = await fetch(`${BASE}/games/add`, {
+        method: "GET",
+      });
+      const newGame = await res.json();
+
+      await fetchGames();
+      return newGame;
+    } catch {
+      console.log("Create game error");
+    } finally {
+      setCreating(false);
+    }
+  }, [fetchGames]);
+
   useEffect(() => {
-    const ctrl = new AbortController();
-    fetchGames(ctrl);
+    fetchGames();
 
     const time = setInterval(() => {
-      const nextCtrl = new AbortController();
-      fetchGames(nextCtrl);
+      fetchGames();
     }, 10000);
 
     return () => {
-      ctrl.abort();
       clearInterval(time);
     };
   }, [fetchGames]);
 
-  return { games };
+  return { games, createGame, creating, findGame };
 }

@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-
+const BASE = "http://localhost:3001/api/gomoku";
 const MainContext = createContext(null);
 
 function MainProvider({ children }) {
