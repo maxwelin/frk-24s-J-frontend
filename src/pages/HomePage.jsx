@@ -1,4 +1,4 @@
-import { Board } from "gumoku-component";
+import { Board, Menu } from "gumoku-component";
 import { BackgroundBanner } from "gumoku-component";
 import "./HomePage.css";
 import { gameConfig } from "../config/gameConfig";
@@ -9,7 +9,8 @@ export default function HomePage() {
 
   return (
     <div>
-      <BackgroundBanner playerTurn={playerTurn} useTurnText />
+      <BackgroundBanner playerTurn={playerTurn} useTurnText />{" "}
+      <Menu className={true} />
       <Board
         {...gameConfig}
         handleCellClick={handleCellClick}
