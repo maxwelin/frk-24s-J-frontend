@@ -1,5 +1,5 @@
-import { Board, Menu } from "gumoku-component";
-import { BackgroundBanner } from "gumoku-component";
+import { Board, Menu } from "@masewe/components";
+import { BackgroundBanner } from "@masewe/components";
 import "./HomePage.css";
 import { gameConfig } from "../config/gameConfig";
 import { useMainContext } from "../hooks/useMainContext";
