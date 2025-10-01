@@ -9,7 +9,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <BackgroundBanner text="GOMOKU" />
+      <BackgroundBanner playerTurn={playerTurn} useTurnText />
       <Board
         {...gameConfig}
         handleCellClick={handleCellClick}
