@@ -1,12 +1,13 @@
-import { Link } from "react-router"
+import { Link } from "react-router";
+import { BackgroundBanner } from "@masewe/components";
 
 const NotFoundPage = () => {
   return (
     <>
-      <h1>404</h1>
+      <BackgroundBanner text="404" />
       <Link to={"/"}>Home</Link>
     </>
-  )
-}
+  );
+};
 
-export default NotFoundPage
+export default NotFoundPage;
