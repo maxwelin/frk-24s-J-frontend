@@ -1,5 +1,5 @@
 import { Board } from "gumoku-component";
-
+import { BackgroundBanner } from "gumoku-component";
 import "./HomePage.css";
 import { gameConfig } from "../config/gameConfig";
 import { useMainContext } from "../hooks/useMainContext";
@@ -9,6 +9,7 @@ export default function HomePage() {
 
   return (
     <div>
+      <BackgroundBanner text="GOMOKU" />
       <Board
         {...gameConfig}
         handleCellClick={handleCellClick}
