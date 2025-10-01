@@ -9,7 +9,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <BackgroundBanner playerTurn={playerTurn} useTurnText />{" "}
+      <BackgroundBanner playerTurn={playerTurn} useTurnText />
       <Menu className={true} />
       <Board
         {...gameConfig}
