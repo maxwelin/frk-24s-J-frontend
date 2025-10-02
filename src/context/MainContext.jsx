@@ -18,11 +18,12 @@ function MainProvider({ children }) {
 
   function startGame({ p1, p2 }) {
     const name1 = (p1 || "").trim() || "Black";
-    const name2 = (p1 || "").trim() || "White";
+    const name2 = (p2 || "").trim() || "White";
     setPlayers({ 1: { name: name1 }, 2: { name: name2 } });
     setPlayerTurn(1);
     setGameState("playing");
     alert("Game has started!");
+    setOpenModal(false)
   }
 
   const placeMove = (cellIndex) => {
@@ -40,6 +41,7 @@ function MainProvider({ children }) {
         setPlayerTurn,
         gameState,
         startGame,
+        players
       }}
     >
       {children}
