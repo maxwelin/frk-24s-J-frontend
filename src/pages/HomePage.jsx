@@ -5,7 +5,7 @@ import { useMainContext } from "../hooks/useMainContext";
 import { useConfigContext } from "../hooks/useConfigContext"
 
 export default function HomePage() {
-  const { handleCellClick, playerTurn, openModal, toggleModal, brickColor } =
+  const { handleCellClick, playerTurn, openModal, toggleModal } =
     useMainContext();
   const { gameConfig } = useConfigContext()
 
@@ -17,7 +17,6 @@ export default function HomePage() {
         {...gameConfig}
         handleCellClick={handleCellClick}
         playerTurn={playerTurn}
-        brickColor={brickColor}
       />
       <Button draggable={true} icon="☰" text="menu" handleClick={toggleModal} />
     </div>

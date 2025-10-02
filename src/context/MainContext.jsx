@@ -5,8 +5,6 @@ const MainContext = createContext(null);
 function MainProvider({ children }) {
   const [playerTurn, setPlayerTurn] = useState(1);
   const [openModal, setOpenModal] = useState(true);
-  const [brickColor, setBrickColor] = useState("");
-  const [activeCell, setActiveCell] = useState(false);
 
   const toggleModal = (e) => {
     e.stopPropagation();
@@ -14,11 +12,9 @@ function MainProvider({ children }) {
   };
 
   const handleCellClick = (id) => {
-    const placingColor = playerTurn === 1 ? "black" : "white";
-    console.log("Clicked cell:", id, "color:", placingColor);
-    setBrickColor(placingColor);
     setPlayerTurn((turn) => (turn === 1 ? 2 : 1));
-    setActiveCell(true);
+    console.log("Clicked cell:", id);
+    console.log(playerTurn);
   };
 
   return (
@@ -28,8 +24,6 @@ function MainProvider({ children }) {
         playerTurn,
         openModal,
         toggleModal,
-        brickColor,
-        activeCell,
       }}
     >
       {children}
