@@ -28,6 +28,9 @@
 
 button, input, select, textarea { font: inherit; }
 
+button {
+  font-weight: 700;
+}
 
 body {
   font-family: "SatoriTrial", sans-serif;
