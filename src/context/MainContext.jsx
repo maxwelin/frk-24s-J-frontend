@@ -14,7 +14,6 @@ function MainProvider({ children }) {
   };
 
   const handleCellClick = (id) => {
-    if (activeCell) return console.log("already activated");
     const placingColor = playerTurn === 1 ? "black" : "white";
     console.log("Clicked cell:", id, "color:", placingColor);
     setBrickColor(placingColor);
@@ -23,24 +22,16 @@ function MainProvider({ children }) {
   };
 
   return (
-<<<<<<< HEAD
-    <MainContext.Provider value={{ 
-      handleCellClick, 
-      playerTurn,
-      openModal,
-      toggleModal
-      }}>
-=======
     <MainContext.Provider
       value={{
         handleCellClick,
         playerTurn,
         openModal,
-        closeModal,
+        toggleModal,
         brickColor,
+        activeCell,
       }}
     >
->>>>>>> e8d7b6d (passing props from handleCellClick in maincontext)
       {children}
     </MainContext.Provider>
   );
