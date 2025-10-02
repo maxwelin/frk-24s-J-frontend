@@ -1,5 +1,5 @@
 export const gameConfig = {
-  boardTiles: 80,
+  boardTiles: 81,
   gameStarted: false,
   largeMenu: true,
   gameEnded: false,
