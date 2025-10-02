@@ -4,9 +4,12 @@ import { router } from "./router";
 import "./index.css";
 
 import { MainProvider } from "./context/MainContext";
+import { ConfigProvider } from "./context/ConfigContext";
 
 createRoot(document.getElementById("root")).render(
-  <MainProvider>
-    <RouterProvider router={router} />
-  </MainProvider>
+  <ConfigProvider>
+    <MainProvider>
+      <RouterProvider router={router} />
+    </MainProvider>
+  </ConfigProvider>
 );

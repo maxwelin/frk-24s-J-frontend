@@ -1,12 +1,13 @@
 import { Board, Button, Menu } from "@masewe/components";
 import { BackgroundBanner } from "@masewe/components";
 import "./HomePage.css";
-import { gameConfig } from "../config/gameConfig";
 import { useMainContext } from "../hooks/useMainContext";
+import { useConfigContext } from "../hooks/useConfigContext"
 
 export default function HomePage() {
   const { handleCellClick, playerTurn, openModal, toggleModal, brickColor } =
     useMainContext();
+  const { gameConfig } = useConfigContext()
 
   return (
     <div>
