@@ -26,6 +26,8 @@
   font-style: normal;
 }
 
+button, input, select, textarea { font: inherit; }
+
 
 body {
   font-family: "SatoriTrial", sans-serif;
