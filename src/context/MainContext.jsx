@@ -6,9 +6,9 @@ function MainProvider({ children }) {
   const [playerTurn, setPlayerTurn] = useState(1);
   const [openModal, setOpenModal] = useState(true);
 
-  const closeModal = (e) => {
+  const toggleModal = (e) => {
     e.stopPropagation();
-    setOpenModal(false);
+    setOpenModal(!openModal);
   };
 
   const handleCellClick = () => {
@@ -20,7 +20,7 @@ function MainProvider({ children }) {
       handleCellClick, 
       playerTurn,
       openModal,
-      closeModal
+      toggleModal
       }}>
       {children}
     </MainContext.Provider>
