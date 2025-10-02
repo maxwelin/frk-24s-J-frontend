@@ -5,12 +5,12 @@ import { gameConfig } from "../config/gameConfig";
 import { useMainContext } from "../hooks/useMainContext";
 
 export default function HomePage() {
-  const { handleCellClick, playerTurn } = useMainContext();
+  const { handleCellClick, playerTurn, openModal, closeModal } = useMainContext();
 
   return (
     <div>
       <BackgroundBanner playerTurn={playerTurn} useTurnText />
-      <Menu className={true} />
+      <Menu className={true} openModal={openModal} closeModal={closeModal} />
       <Board
         {...gameConfig}
         handleCellClick={handleCellClick}

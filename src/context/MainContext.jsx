@@ -4,13 +4,24 @@ const MainContext = createContext(null);
 
 function MainProvider({ children }) {
   const [playerTurn, setPlayerTurn] = useState(1);
+  const [openModal, setOpenModal] = useState(true);
+
+  const closeModal = (e) => {
+    e.stopPropagation();
+    setOpenModal(false);
+  };
 
   const handleCellClick = () => {
     setPlayerTurn((turn) => (turn === 1 ? 2 : 1));
   };
 
   return (
-    <MainContext.Provider value={{ handleCellClick, playerTurn }}>
+    <MainContext.Provider value={{ 
+      handleCellClick, 
+      playerTurn,
+      openModal,
+      closeModal
+      }}>
       {children}
     </MainContext.Provider>
   );
