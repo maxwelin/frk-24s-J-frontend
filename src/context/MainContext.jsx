@@ -4,6 +4,7 @@ const MainContext = createContext(null);
 
 function MainProvider({ children }) {
   const [playerTurn, setPlayerTurn] = useState(1);
+  const [gameState, setGameState] = useState("playing");
   const [openModal, setOpenModal] = useState(true);
 
   const toggleModal = (e) => {
@@ -11,24 +12,20 @@ function MainProvider({ children }) {
     setOpenModal(!openModal);
   };
 
-  const handleCellClick = (id) => {
-    setPlayerTurn((turn) => {
-      if (turn !== 1 && turn !== 2) {
-        console.error("invalid player turn value", turn);
-        return 1;
-      }
-      return turn === 1 ? 2 : 1;
-    });
-    console.log("Clicked cell:", id);
+  const placeMove = (cellIndex) => {
+    setPlayerTurn((t) => (t === 1 ? 2 : 1));
+    console.log("Brick placed on cell:", cellIndex);
   };
 
   return (
     <MainContext.Provider
       value={{
-        handleCellClick,
+        placeMove,
         playerTurn,
         openModal,
         toggleModal,
+        setPlayerTurn,
+        gameState,
       }}
     >
       {children}
