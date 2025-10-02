@@ -6,19 +6,25 @@ import { useConfigContext } from "../hooks/useConfigContext";
 
 export default function HomePage() {
   const {
-    handleCellClick,
     playerTurn,
     openModal,
     toggleModal,
     placeMove,
     gameState,
+    startGame,
   } = useMainContext();
   const { gameConfig } = useConfigContext();
 
   return (
     <div>
       <BackgroundBanner playerTurn={playerTurn} useTurnText />
-      <Menu className={true} openModal={openModal} toggleModal={toggleModal} />
+      <Menu
+        className={true}
+        openModal={openModal}
+        toggleModal={toggleModal}
+        gameState={gameState}
+        startGame={startGame}
+      />
       <Board
         {...gameConfig}
         playerTurn={playerTurn}
