@@ -12,9 +12,14 @@ function MainProvider({ children }) {
   };
 
   const handleCellClick = (id) => {
-    setPlayerTurn((turn) => (turn === 1 ? 2 : 1));
+    setPlayerTurn((turn) => {
+      if (turn !== 1 && turn !== 2) {
+        console.error("invalid player turn value", turn);
+        return 1;
+      }
+      return turn === 1 ? 2 : 1;
+    });
     console.log("Clicked cell:", id);
-    console.log(playerTurn);
   };
 
   return (
