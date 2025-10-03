@@ -3,6 +3,7 @@ import { BackgroundBanner } from "@masewe/components";
 import "./HomePage.css";
 import { useMainContext } from "../hooks/useMainContext";
 import { useConfigContext } from "../hooks/useConfigContext";
+// import { useApiContext } from "../hooks/useApiContext";
 
 export default function HomePage() {
   const {
@@ -14,6 +15,7 @@ export default function HomePage() {
     startGame,
   } = useMainContext();
   const { boardTiles } = useConfigContext();
+  // const { addGame } = useApiContext();
 
   return (
     <div>
@@ -32,6 +34,8 @@ export default function HomePage() {
         gameState={gameState}
       />
       <Button draggable={true} icon="☰" text="menu" handleClick={toggleModal} />
+      {/*ignorera denna knapp, det är för att testa anrop mot backend :) */}
+      {/* <button onClick={addGame}>Test</button> */}
     </div>
   );
 }

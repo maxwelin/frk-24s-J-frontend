@@ -5,11 +5,14 @@ import "./index.css";
 
 import { MainProvider } from "./context/MainContext";
 import { ConfigProvider } from "./context/ConfigContext";
+import { ApiProvider } from "./context/ApiContext";
 
 createRoot(document.getElementById("root")).render(
   <ConfigProvider>
-    <MainProvider>
-      <RouterProvider router={router} />
-    </MainProvider>
+    <ApiProvider>
+      <MainProvider>
+        <RouterProvider router={router} />
+      </MainProvider>
+    </ApiProvider>
   </ConfigProvider>
 );
