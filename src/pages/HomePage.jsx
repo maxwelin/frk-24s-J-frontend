@@ -24,7 +24,11 @@ export default function HomePage() {
 
   return (
     <div>
-      <BackgroundBanner playerTurn={playerTurn} useTurnText />
+      <BackgroundBanner
+        text="GOMOKU"
+        playerTurn={gameState === "playing" ? playerTurn : undefined}
+        useTurnText={gameState === "playing"}
+      />
       <Menu
         className={true}
         openModal={openModal}
