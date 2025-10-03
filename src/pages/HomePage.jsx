@@ -9,7 +9,7 @@ import { useConfigContext } from "../hooks/useConfigContext";
 // import { useApiContext } from "../hooks/useApiContext";
 
 export default function HomePage() {
-  const { playerTurn, openModal, openMenu, placeMove, gameState, startGame } =
+  const { playerTurn, openModal, openMenu, placeMove, gameState, startGame, toggleModal } =
     useMainContext();
   const { boardTiles } = useConfigContext();
 
@@ -34,6 +34,7 @@ export default function HomePage() {
         openModal={openModal}
         gameState={gameState}
         startGame={startGame}
+        toggleModal={toggleModal}
       />
       <Board
         boardTiles={boardTiles}

@@ -11,10 +11,10 @@ function MainProvider({ children }) {
   const [gameState, setGameState] = useState("menu");
   const [openModal, setOpenModal] = useState(true);
 
-  // const toggleModal = (e) => {
-  //   e.stopPropagation();
-  //   setOpenModal(!openModal);
-  // };
+  const toggleModal = (e) => {
+    e.stopPropagation();
+    setOpenModal(!openModal);
+  };
 
   const closeMenu = () => setOpenModal(false);
   const openMenu = () => setOpenModal(true);
@@ -40,6 +40,7 @@ function MainProvider({ children }) {
         placeMove,
         playerTurn,
         openModal,
+        toggleModal,
         openMenu,
         closeMenu,
         setPlayerTurn,
