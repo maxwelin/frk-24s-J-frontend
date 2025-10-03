@@ -47,6 +47,7 @@ export default function HomePage() {
         boardTiles={boardTiles}
         playerTurn={playerTurn}
         placeMove={placeMove}
+        gameState={gameState}
       />
       <Button draggable={true} icon="☰" text="menu" handleClick={openMenu} />
       {/* ignorera dessa knappar, det är för att testa anrop mot backend :) */}
