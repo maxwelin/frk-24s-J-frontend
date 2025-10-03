@@ -9,8 +9,15 @@ import { useConfigContext } from "../hooks/useConfigContext";
 // import { useApiContext } from "../hooks/useApiContext";
 
 export default function HomePage() {
-  const { playerTurn, openModal, openMenu, placeMove, gameState, startGame, toggleModal } =
-    useMainContext();
+  const {
+    playerTurn,
+    openModal,
+    openMenu,
+    placeMove,
+    gameState,
+    startGame,
+    toggleModal,
+  } = useMainContext();
   const { boardTiles } = useConfigContext();
 
   {
@@ -40,7 +47,6 @@ export default function HomePage() {
         boardTiles={boardTiles}
         playerTurn={playerTurn}
         placeMove={placeMove}
-        gameState={gameState}
       />
       <Button draggable={true} icon="☰" text="menu" handleClick={openMenu} />
       {/* ignorera dessa knappar, det är för att testa anrop mot backend :) */}
