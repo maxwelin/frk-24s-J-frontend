@@ -9,6 +9,7 @@ import { useConfigContext } from "../hooks/useConfigContext";
 // import { useApiContext } from "../hooks/useApiContext";
 
 export default function HomePage() {
+<<<<<<< HEAD
   const {
     playerTurn,
     openModal,
@@ -19,6 +20,11 @@ export default function HomePage() {
     toggleModal,
   } = useMainContext();
   const { boardTiles } = useConfigContext();
+=======
+  const { playerTurn, openModal, openMenu, placeMove, gameState, startGame, toggleModal } =
+    useMainContext();
+  const { boardTiles, rows, cols } = useConfigContext();
+>>>>>>> 32c4b59 (added playPiece func in apiContext. Rows and Cols injected in homePage.jsx and passed to board as props)
 
   {
     /* ignorera dessa, det är för att testa anrop mot backend :) */
@@ -45,6 +51,8 @@ export default function HomePage() {
       />
       <Board
         boardTiles={boardTiles}
+        boardRows={rows}
+        boardCols={cols}
         playerTurn={playerTurn}
         placeMove={placeMove}
         gameState={gameState}
