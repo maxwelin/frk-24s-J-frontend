@@ -11,10 +11,13 @@ function MainProvider({ children }) {
   const [gameState, setGameState] = useState("menu");
   const [openModal, setOpenModal] = useState(true);
 
-  const toggleModal = (e) => {
-    e.stopPropagation();
-    setOpenModal(!openModal);
-  };
+  // const toggleModal = (e) => {
+  //   e.stopPropagation();
+  //   setOpenModal(!openModal);
+  // };
+
+  const closeMenu = () => setOpenModal(false);
+  const openMenu = () => setOpenModal(true);
 
   function startGame({ p1, p2 }) {
     const name1 = (p1 || "").trim() || "Black";
@@ -23,7 +26,7 @@ function MainProvider({ children }) {
     setPlayerTurn(1);
     setGameState("playing");
     alert("Game has started!");
-    setOpenModal(false)
+    closeMenu();
   }
 
   const placeMove = (cellIndex) => {
@@ -37,11 +40,12 @@ function MainProvider({ children }) {
         placeMove,
         playerTurn,
         openModal,
-        toggleModal,
+        openMenu,
+        closeMenu,
         setPlayerTurn,
         gameState,
         startGame,
-        players
+        players,
       }}
     >
       {children}
