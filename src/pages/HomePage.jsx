@@ -4,7 +4,6 @@ import "./HomePage.css";
 import { useMainContext } from "../hooks/useMainContext";
 import { useConfigContext } from "../hooks/useConfigContext";
 
-
 export default function HomePage() {
   const {
     playerTurn,
