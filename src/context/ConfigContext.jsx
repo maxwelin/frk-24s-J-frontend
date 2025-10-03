@@ -4,18 +4,12 @@ const ConfigContext = createContext(null);
 
 function ConfigProvider({ children }) {
 
-  const gameConfig = {
-  boardTiles: 300,
-  gameStarted: false,
-  largeMenu: true,
-  gameEnded: false,
-  className: "",
-};
+const boardTiles = 300
 
   return (
     <ConfigContext.Provider
       value={{
-       gameConfig
+       boardTiles
       }}
     >
       {children}

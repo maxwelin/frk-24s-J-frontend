@@ -13,7 +13,7 @@ export default function HomePage() {
     gameState,
     startGame,
   } = useMainContext();
-  const { gameConfig } = useConfigContext();
+  const { boardTiles } = useConfigContext();
 
   return (
     <div>
@@ -26,7 +26,7 @@ export default function HomePage() {
         startGame={startGame}
       />
       <Board
-        {...gameConfig}
+        boardTiles={boardTiles}
         playerTurn={playerTurn}
         placeMove={placeMove}
         gameState={gameState}
