@@ -29,6 +29,11 @@ function MainProvider({ children }) {
     console.log("MainProvider mounted");
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("players", JSON.stringify(players));
+    }, [players]);
+
+
   const getPlayerId = (i) => {
     return players[i].id;
   };
@@ -62,9 +67,8 @@ function MainProvider({ children }) {
       1: { name: name1, id: player1Id },
       2: { name: name2, id: player2Id },
     };
-    setPlayers(players, () => {
-        localStorage.setItem("players", JSON.stringify(players));
-    });
+    console.log("Created players:", players);
+    setPlayers(players);
 
     await joinGame(gameId, player1Id);
     await joinGame(gameId, player2Id);
