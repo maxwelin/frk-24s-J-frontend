@@ -21,6 +21,7 @@ export default function HomePage() {
     gameState,
     startGame,
     toggleModal,
+    players
   } = useMainContext();
 
   const { rows, cols } = useConfigContext();
@@ -38,6 +39,7 @@ export default function HomePage() {
         text="GOMOKU"
         playerTurn={gameState === "playing" ? playerTurn : undefined}
         useTurnText={gameState === "playing"}
+        players={players}
       />
       <Menu
         className={true}
@@ -52,7 +54,7 @@ export default function HomePage() {
           gameState={gameState}
         >
           {gameState === "menu" && (
-            <Button type="submit" text="Play game" style={"primary"}>
+            <Button type="submit" icon="▶" text="Play game" style={"primary"}>
               Play Game
             </Button>
           )}
