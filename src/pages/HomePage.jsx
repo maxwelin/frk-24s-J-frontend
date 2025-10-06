@@ -24,7 +24,8 @@ export default function HomePage() {
     startGame,
     toggleModal,
     players,
-    playAgain
+    playAgain,
+    resetBoard,
   } = useMainContext();
 
   const { rows, cols } = useConfigContext();
@@ -40,10 +41,6 @@ export default function HomePage() {
       )}
 
       {winner && <>
-       <Board
-      boardRows={rows}
-      boardCols={cols}
-      />
         <VictoryScreen player={winner} onEnter={setHidePointer} playAgain={playAgain}/>
       </>}
 
@@ -84,7 +81,7 @@ export default function HomePage() {
           )}
         </PlayerForm>
       </Menu>
-      {!winner && 
+      {!resetBoard && 
       <Board
       boardRows={rows}
       boardCols={cols}

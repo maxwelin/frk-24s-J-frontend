@@ -19,6 +19,7 @@ function MainProvider({ children }) {
   const [gameState, setGameState] = useState("menu");
   const [openModal, setOpenModal] = useState(true);
   const [gameId, setGameId] = useState(true);
+  const [resetBoard, setResetBoard] = useState(false);
 
   const toggleModal = (e) => {
     e.stopPropagation();
@@ -33,19 +34,20 @@ function MainProvider({ children }) {
   }
 
   const playAgain = async () => {
-
+    setResetBoard(true)
     const gameId = await createGame()
     setGameId(gameId)
-
+    
     const player1 = players[1].id
     const player2 = players[2].id
     
     await joinGame(gameId, player1)
     await joinGame(gameId, player2)
-
+    
     setWinner("")
     setPlayerTurn(1);
     setGameState("playing");
+    setResetBoard(false)
   }
   
   async function startGame({ p1, p2 }) {
@@ -87,7 +89,8 @@ function MainProvider({ children }) {
         gameState,
         startGame,
         players,
-        playAgain
+        playAgain,
+        resetBoard
       }}
     >
       {children}
