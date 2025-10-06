@@ -28,6 +28,7 @@ export default function HomePage() {
     resetBoard,
     showForm,
     setShowForm,
+    resetGame,
   } = useMainContext();
 
   const { rows, cols } = useConfigContext();
@@ -80,7 +81,7 @@ export default function HomePage() {
           {gameState === "playing" && (
             <>
               <Button text="quit" icon="▶|" />
-              <Button text="restart" icon="⟳" />
+              <Button text="restart" icon="⟳" handleClick={resetGame} />
               <Button
                 type="button"
                 text="resume"

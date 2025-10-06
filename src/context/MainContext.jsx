@@ -79,6 +79,14 @@ function MainProvider({ children }) {
     console.log("Brick placed on cell:", cellIndex);
   };
 
+  const resetGame = () => {
+    setShowForm(true);
+    setOpenModal(true);
+    setGameId(null);
+    setWinner("");
+    playAgain();
+  };
+
   return (
     <MainContext.Provider
       value={{
@@ -96,6 +104,8 @@ function MainProvider({ children }) {
         resetBoard,
         setShowForm,
         showForm,
+        setGameState,
+        resetGame,
       }}
     >
       {children}
