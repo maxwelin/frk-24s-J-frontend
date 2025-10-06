@@ -58,9 +58,12 @@ function MainProvider({ children }) {
     const name2 = (p2 || "").trim() || "White";
     const player1Id = await createPlayer(name1);
     const player2Id = await createPlayer(name2);
-    setPlayers({
+    const players = {
       1: { name: name1, id: player1Id },
       2: { name: name2, id: player2Id },
+    };
+    setPlayers(players, () => {
+        localStorage.setItem("players", JSON.stringify(players));
     });
 
     await joinGame(gameId, player1Id);
