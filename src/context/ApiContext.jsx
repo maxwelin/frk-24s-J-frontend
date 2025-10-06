@@ -66,7 +66,7 @@ function ApiProvider({ children }) {
     }
   }
   
-  const placePiece = async (gameId, playerId, piecePosition) => {
+  const playPiece = async (gameId, playerId, piecePosition) => {
     try {
       const res = await fetch(`${BASE_URL}${import.meta.env.VITE_PLAY_ENDPOINT}/${gameId}/${playerId}/${piecePosition.col}/${piecePosition.row}`)
       const data = await res.json()
@@ -91,6 +91,7 @@ function ApiProvider({ children }) {
     console.log("game id: ", gameId)
     await joinGame(gameId, p1)
     await joinGame(gameId, p2)
+    return gameId
   }
 
   return (
@@ -99,7 +100,7 @@ function ApiProvider({ children }) {
         createGame,
         createPlayer,
         joinGame,
-        placePiece,
+        playPiece,
         gameOnDonkeyKong
       }}
     >

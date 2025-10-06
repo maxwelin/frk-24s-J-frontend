@@ -3,6 +3,7 @@ import { BackgroundBanner } from "@masewe/components";
 import "./HomePage.css";
 import { useMainContext } from "../hooks/useMainContext";
 import { useConfigContext } from "../hooks/useConfigContext";
+import { useApiContext } from "../hooks/useApiContext";
 
 
 export default function HomePage() {
@@ -17,6 +18,11 @@ export default function HomePage() {
   } = useMainContext();
 
   const { rows, cols } = useConfigContext();
+  const { gameOnDonkeyKong } = useApiContext()
+
+  const handleClick = () => {
+    gameOnDonkeyKong("sean", "banan")
+  }
 
   return (
     <div>
@@ -40,6 +46,7 @@ export default function HomePage() {
         gameState={gameState}
       />
       <Button draggable={true} icon="☰" text="menu" handleClick={openMenu} />
+      <button onClick={handleClick}>test</button>
     </div>
   );
 }
