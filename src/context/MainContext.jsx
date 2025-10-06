@@ -5,7 +5,7 @@ const MainContext = createContext(null);
 
 function MainProvider({ children }) {
 
-  const { playPiece, createGame, createPlayer, joinGame } = useApiContext()
+  const { playPiece, createGame, createPlayer, joinGame, setWinner } = useApiContext()
   
   const [players, setPlayers] = useState({
     1: { name: "Black",
@@ -30,6 +30,22 @@ function MainProvider({ children }) {
 
   const getPlayerId = (i) => {
     return players[i].id
+  }
+
+  const playAgain = async () => {
+
+    const gameId = await createGame()
+    setGameId(gameId)
+
+    const player1 = players[1].id
+    const player2 = players[2].id
+    
+    await joinGame(gameId, player1)
+    await joinGame(gameId, player2)
+
+    setWinner("")
+    setPlayerTurn(1);
+    setGameState("playing");
   }
   
   async function startGame({ p1, p2 }) {
@@ -71,6 +87,7 @@ function MainProvider({ children }) {
         gameState,
         startGame,
         players,
+        playAgain
       }}
     >
       {children}

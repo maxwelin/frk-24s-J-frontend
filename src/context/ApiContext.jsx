@@ -100,6 +100,7 @@ function ApiProvider({ children }) {
         joinGame,
         playPiece,
         winner,
+        setWinner
       }}
     >
       {children}

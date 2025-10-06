@@ -23,7 +23,8 @@ export default function HomePage() {
     gameState,
     startGame,
     toggleModal,
-    players
+    players,
+    playAgain
   } = useMainContext();
 
   const { rows, cols } = useConfigContext();
@@ -38,7 +39,13 @@ export default function HomePage() {
         <CustomPointer playerTurn={playerTurn} />
       )}
 
-      {winner && <VictoryScreen player={winner} onEnter={setHidePointer}/>}
+      {winner && <>
+       <Board
+      boardRows={rows}
+      boardCols={cols}
+      />
+        <VictoryScreen player={winner} onEnter={setHidePointer} playAgain={playAgain}/>
+      </>}
 
       <BackgroundBanner
         text="GOMOKU"
@@ -77,13 +84,15 @@ export default function HomePage() {
           )}
         </PlayerForm>
       </Menu>
+      {!winner && 
       <Board
-        boardRows={rows}
-        boardCols={cols}
-        playerTurn={playerTurn}
-        placeMove={placeMove}
-        gameState={gameState}
-        />
+      boardRows={rows}
+      boardCols={cols}
+      playerTurn={playerTurn}
+      placeMove={placeMove}
+      gameState={gameState}
+      />
+    }
       {!winner && <div
         onPointerEnter={() => setHidePointer(true)}
         onPointerLeave={() => setHidePointer(false)}
