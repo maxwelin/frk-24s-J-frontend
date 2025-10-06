@@ -5,14 +5,16 @@ import {
   PlayerForm,
   CustomPointer,
   VictoryScreen,
+  Spinner
 } from "@masewe/components";
 import { BackgroundBanner } from "@masewe/components";
 import "./HomePage.css";
 import { useMainContext } from "../hooks/useMainContext";
 import { useConfigContext } from "../hooks/useConfigContext";
-
-import { useState } from "react";
 import { useApiContext } from "../hooks/useApiContext";
+
+import { useState, useEffect } from "react";
+
 
 export default function HomePage() {
   const {
@@ -35,7 +37,31 @@ export default function HomePage() {
   const { winner } = useApiContext();
 
   const [hidePointer, setHidePointer] = useState(false);
+  const [loading, setLoading] = useState(true); // ← new loading state
 
+  // Show spinner for 5 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Show spinner while loading
+  if (loading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <Spinner />
+      </div>
+    );
+  }
+
+  // Original content after spinner
   return (
     <div>
       {gameState === "playing" && !openModal && !hidePointer && (
@@ -58,6 +84,7 @@ export default function HomePage() {
         useTurnText={gameState === "playing"}
         players={players}
       />
+
       <Menu
         className={true}
         openModal={openModal}
@@ -93,6 +120,7 @@ export default function HomePage() {
           )}
         </PlayerForm>
       </Menu>
+
       {!resetBoard && (
         <Board
           boardRows={rows}
@@ -102,17 +130,13 @@ export default function HomePage() {
           gameState={gameState}
         />
       )}
+
       {!winner && (
         <div
           onPointerEnter={() => setHidePointer(true)}
           onPointerLeave={() => setHidePointer(false)}
         >
-          <Button
-            draggable={true}
-            icon="☰"
-            text="menu"
-            handleClick={openMenu}
-          />
+          <Button draggable={true} icon="☰" text="menu" handleClick={openMenu} />
         </div>
       )}
     </div>
