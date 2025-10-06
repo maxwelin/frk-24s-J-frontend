@@ -1,4 +1,4 @@
-import { Board, Button, Menu } from "@masewe/components";
+import { Board, Button, Menu, PlayerForm } from "@masewe/components";
 import { BackgroundBanner } from "@masewe/components";
 import "./HomePage.css";
 import { useMainContext } from "../hooks/useMainContext";
@@ -30,7 +30,13 @@ export default function HomePage() {
         gameState={gameState}
         startGame={startGame}
         toggleModal={toggleModal}
-      />
+      >
+        <PlayerForm
+          toggleModal={toggleModal}
+          startGame={startGame}
+          gameState={gameState}
+        />
+      </Menu>
       <Board
         boardRows={rows}
         boardCols={cols}
