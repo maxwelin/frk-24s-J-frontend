@@ -1,4 +1,10 @@
-import { Board, Button, Menu, PlayerForm } from "@masewe/components";
+import {
+  Board,
+  Button,
+  Menu,
+  PlayerForm,
+  CustomPointer,
+} from "@masewe/components";
 import { BackgroundBanner } from "@masewe/components";
 import "./HomePage.css";
 import { useMainContext } from "../hooks/useMainContext";
@@ -17,14 +23,16 @@ export default function HomePage() {
   } = useMainContext();
 
   const { rows, cols } = useConfigContext();
-  const { gameOnDonkeyKong } = useApiContext()
+  const { gameOnDonkeyKong } = useApiContext();
 
   const handleClick = () => {
-    gameOnDonkeyKong("sean", "banan")
-  }
+    gameOnDonkeyKong("sean", "banan");
+  };
 
   return (
     <div>
+      {gameState === "playing" && <CustomPointer playerTurn={playerTurn} />}
+
       <BackgroundBanner
         text="GOMOKU"
         playerTurn={gameState === "playing" ? playerTurn : undefined}
