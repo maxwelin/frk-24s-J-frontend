@@ -10,6 +10,7 @@ import "./HomePage.css";
 import { useMainContext } from "../hooks/useMainContext";
 import { useConfigContext } from "../hooks/useConfigContext";
 import { useApiContext } from "../hooks/useApiContext";
+import { useState } from "react";
 
 export default function HomePage() {
   const {
@@ -24,6 +25,7 @@ export default function HomePage() {
 
   const { rows, cols } = useConfigContext();
   const { gameOnDonkeyKong } = useApiContext();
+  const [hidePointer, setHidePointer] = useState(false);
 
   const handleClick = () => {
     gameOnDonkeyKong("sean", "banan");
@@ -31,7 +33,9 @@ export default function HomePage() {
 
   return (
     <div>
-      {gameState === "playing" && <CustomPointer playerTurn={playerTurn} />}
+      {gameState === "playing" && !openModal && !hidePointer && (
+        <CustomPointer playerTurn={playerTurn} />
+      )}
 
       <BackgroundBanner
         text="GOMOKU"
@@ -76,7 +80,12 @@ export default function HomePage() {
         placeMove={placeMove}
         gameState={gameState}
       />
-      <Button draggable={true} icon="☰" text="menu" handleClick={openMenu} />
+      <div
+        onPointerEnter={() => setHidePointer(true)}
+        onPointerLeave={() => setHidePointer(false)}
+      >
+        <Button draggable={true} icon="☰" text="menu" handleClick={openMenu} />
+      </div>
       <button onClick={handleClick}>test</button>
     </div>
   );
