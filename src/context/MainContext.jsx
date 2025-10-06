@@ -47,8 +47,9 @@ function MainProvider({ children }) {
 
     setPlayerTurn(1);
     setGameState("playing");
-    alert("Game has started!")
+
     closeMenu();
+    alert("GAME HAS STARTED");
   }
 
   const placeMove = async (cellIndex) => {

@@ -1,10 +1,9 @@
-import { Board, Button, Menu } from "@masewe/components";
+import { Board, Button, Menu, PlayerForm } from "@masewe/components";
 import { BackgroundBanner } from "@masewe/components";
 import "./HomePage.css";
 import { useMainContext } from "../hooks/useMainContext";
 import { useConfigContext } from "../hooks/useConfigContext";
 import { useApiContext } from "../hooks/useApiContext";
-
 
 export default function HomePage() {
   const {
@@ -37,7 +36,31 @@ export default function HomePage() {
         gameState={gameState}
         startGame={startGame}
         toggleModal={toggleModal}
-      />
+      >
+        <PlayerForm
+          toggleModal={toggleModal}
+          startGame={startGame}
+          gameState={gameState}
+        >
+          {gameState === "menu" && (
+            <Button type="submit" text="Play game" style={"primary"}>
+              Play Game
+            </Button>
+          )}
+          {gameState === "playing" && (
+            <>
+              <Button text="quit" icon="▶|" />
+              <Button text="restart" icon="⟳" />
+              <Button
+                text="resume"
+                icon="▶"
+                style="primary"
+                onClick={toggleModal}
+              />{" "}
+            </>
+          )}
+        </PlayerForm>
+      </Menu>
       <Board
         boardRows={rows}
         boardCols={cols}
