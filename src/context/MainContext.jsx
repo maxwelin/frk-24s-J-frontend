@@ -49,7 +49,6 @@ function MainProvider({ children }) {
     setGameState("playing");
 
     closeMenu();
-    alert("GAME HAS STARTED");
   }
 
   const placeMove = async (cellIndex) => {

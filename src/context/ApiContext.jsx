@@ -75,23 +75,19 @@ function ApiProvider({ children }) {
         throw new Error(`Error placing piece: ${res.status}`)
       }
       
-      console.log(data)
+      console.log(data.game)
+
+      if(data.won === true) {
+        if(data.game.player === 1) {
+          alert(data.game.player1.name + " won!")
+        } else {
+          alert(data.game.player1.name + " won!")
+        }
+      }
       
     } catch (error) {
       console.error(error)
     }
-  }
-
-  const gameOnDonkeyKong = async (player1Name, player2Name) => {
-    const p1 = await createPlayer(player1Name)
-    console.log("player one id: ", p1)
-    const p2 = await createPlayer(player2Name)
-    console.log("player two id: ", p2)
-    const gameId = await createGame()
-    console.log("game id: ", gameId)
-    await joinGame(gameId, p1)
-    await joinGame(gameId, p2)
-    return gameId
   }
 
   return (
@@ -101,7 +97,6 @@ function ApiProvider({ children }) {
         createPlayer,
         joinGame,
         playPiece,
-        gameOnDonkeyKong
       }}
     >
       {children}
