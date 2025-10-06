@@ -35,7 +35,25 @@ export default function HomePage() {
           toggleModal={toggleModal}
           startGame={startGame}
           gameState={gameState}
-        />
+        >
+          {gameState === "menu" && (
+            <Button type="submit" text="Play game" style={"primary"}>
+              Play Game
+            </Button>
+          )}
+          {gameState === "playing" && (
+            <>
+              <Button text="quit" icon="▶|" />
+              <Button text="restart" icon="⟳" />
+              <Button
+                text="resume"
+                icon="▶"
+                style="primary"
+                onClick={toggleModal}
+              />{" "}
+            </>
+          )}
+        </PlayerForm>
       </Menu>
       <Board
         boardRows={rows}

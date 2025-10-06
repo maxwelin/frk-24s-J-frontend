@@ -25,8 +25,8 @@ function MainProvider({ children }) {
     setPlayers({ 1: { name: name1 }, 2: { name: name2 } });
     setPlayerTurn(1);
     setGameState("playing");
-    alert("Game has started!");
     closeMenu();
+    alert("GAME HAS STARTED");
   }
 
   const placeMove = (cellIndex) => {
