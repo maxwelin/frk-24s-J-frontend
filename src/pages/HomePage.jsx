@@ -4,6 +4,7 @@ import {
   Menu,
   PlayerForm,
   CustomPointer,
+  VictoryScreen
 } from "@masewe/components";
 import { BackgroundBanner } from "@masewe/components";
 import "./HomePage.css";
@@ -11,6 +12,7 @@ import { useMainContext } from "../hooks/useMainContext";
 import { useConfigContext } from "../hooks/useConfigContext";
 
 import { useState } from "react";
+import { useApiContext } from "../hooks/useApiContext";
 
 export default function HomePage() {
   const {
@@ -25,6 +27,7 @@ export default function HomePage() {
   } = useMainContext();
 
   const { rows, cols } = useConfigContext();
+  const { winner } = useApiContext();
 
   const [hidePointer, setHidePointer] = useState(false);
 
@@ -34,6 +37,8 @@ export default function HomePage() {
       {gameState === "playing" && !openModal && !hidePointer && (
         <CustomPointer playerTurn={playerTurn} />
       )}
+
+      {winner && <VictoryScreen player={winner} onEnter={setHidePointer}/>}
 
       <BackgroundBanner
         text="GOMOKU"
@@ -47,12 +52,12 @@ export default function HomePage() {
         gameState={gameState}
         startGame={startGame}
         toggleModal={toggleModal}
-      >
+        >
         <PlayerForm
           toggleModal={toggleModal}
           startGame={startGame}
           gameState={gameState}
-        >
+          >
           {gameState === "menu" && (
             <Button type="submit" icon="▶" text="Play game" style={"primary"}>
               Play Game
@@ -67,7 +72,7 @@ export default function HomePage() {
                 icon="▶"
                 style="primary"
                 onClick={toggleModal}
-              />{" "}
+                />{" "}
             </>
           )}
         </PlayerForm>
@@ -78,13 +83,14 @@ export default function HomePage() {
         playerTurn={playerTurn}
         placeMove={placeMove}
         gameState={gameState}
-      />
-      <div
+        />
+      {!winner && <div
         onPointerEnter={() => setHidePointer(true)}
         onPointerLeave={() => setHidePointer(false)}
-      >
-        <Button draggable={true} icon="☰" text="menu" handleClick={openMenu} />
-      </div>
+        >
+          <Button draggable={true} icon="☰" text="menu" handleClick={openMenu} />
+        </div>
+      }
     </div>
   );
 }

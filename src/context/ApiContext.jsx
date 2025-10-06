@@ -1,10 +1,12 @@
-import { createContext  } from "react";
+import { createContext, useState  } from "react";
 
 const ApiContext = createContext(null);
 
 function ApiProvider({ children }) {
 
   const BASE_URL = import.meta.env.VITE_API_BASE_URL
+
+  const [winner, setWinner] = useState("")
 
   const createGame = async () => {
     try {
@@ -75,13 +77,13 @@ function ApiProvider({ children }) {
         throw new Error(`Error placing piece: ${res.status}`)
       }
       
-      console.log(data.game)
+      console.log(data.game, data.won)
 
       if(data.won === true) {
         if(data.game.player === 1) {
-          alert(data.game.player1.name + " won!")
+          setWinner(data.game.player1.name)
         } else {
-          alert(data.game.player1.name + " won!")
+          setWinner(data.game.player2.name)
         }
       }
       
@@ -97,6 +99,7 @@ function ApiProvider({ children }) {
         createPlayer,
         joinGame,
         playPiece,
+        winner,
       }}
     >
       {children}
