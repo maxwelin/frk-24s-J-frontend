@@ -4,7 +4,7 @@ import {
   Menu,
   PlayerForm,
   CustomPointer,
-  VictoryScreen
+  VictoryScreen,
 } from "@masewe/components";
 import { BackgroundBanner } from "@masewe/components";
 import "./HomePage.css";
@@ -26,6 +26,8 @@ export default function HomePage() {
     players,
     playAgain,
     resetBoard,
+    showForm,
+    setShowForm,
   } = useMainContext();
 
   const { rows, cols } = useConfigContext();
@@ -33,16 +35,21 @@ export default function HomePage() {
 
   const [hidePointer, setHidePointer] = useState(false);
 
-
   return (
     <div>
       {gameState === "playing" && !openModal && !hidePointer && (
         <CustomPointer playerTurn={playerTurn} />
       )}
 
-      {winner && <>
-        <VictoryScreen player={winner} onEnter={setHidePointer} playAgain={playAgain}/>
-      </>}
+      {winner && (
+        <>
+          <VictoryScreen
+            player={winner}
+            onEnter={setHidePointer}
+            playAgain={playAgain}
+          />
+        </>
+      )}
 
       <BackgroundBanner
         text="GOMOKU"
@@ -56,12 +63,15 @@ export default function HomePage() {
         gameState={gameState}
         startGame={startGame}
         toggleModal={toggleModal}
-        >
+      >
         <PlayerForm
           toggleModal={toggleModal}
           startGame={startGame}
           gameState={gameState}
-          >
+          players={players}
+          showForm={showForm}
+          setShowForm={setShowForm}
+        >
           {gameState === "menu" && (
             <Button type="submit" icon="▶" text="Play game" style={"primary"}>
               Play Game
@@ -72,31 +82,38 @@ export default function HomePage() {
               <Button text="quit" icon="▶|" />
               <Button text="restart" icon="⟳" />
               <Button
+                type="button"
                 text="resume"
                 icon="▶"
                 style="primary"
-                onClick={toggleModal}
-                />{" "}
+                handleClick={toggleModal}
+              />{" "}
             </>
           )}
         </PlayerForm>
       </Menu>
-      {!resetBoard && 
-      <Board
-      boardRows={rows}
-      boardCols={cols}
-      playerTurn={playerTurn}
-      placeMove={placeMove}
-      gameState={gameState}
-      />
-    }
-      {!winner && <div
-        onPointerEnter={() => setHidePointer(true)}
-        onPointerLeave={() => setHidePointer(false)}
+      {!resetBoard && (
+        <Board
+          boardRows={rows}
+          boardCols={cols}
+          playerTurn={playerTurn}
+          placeMove={placeMove}
+          gameState={gameState}
+        />
+      )}
+      {!winner && (
+        <div
+          onPointerEnter={() => setHidePointer(true)}
+          onPointerLeave={() => setHidePointer(false)}
         >
-          <Button draggable={true} icon="☰" text="menu" handleClick={openMenu} />
+          <Button
+            draggable={true}
+            icon="☰"
+            text="menu"
+            handleClick={openMenu}
+          />
         </div>
-      }
+      )}
     </div>
   );
 }
