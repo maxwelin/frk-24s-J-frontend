@@ -69,7 +69,7 @@ export default function HomePage() {
 
       {winner && (
         <>
-          <VictoryScreen player={winner} onEnter={setHidePointer}>
+          <VictoryScreen player={winner}>
             <>
               <Button type="button" text="Quit" handleClick={resetGame} />
               <Button
