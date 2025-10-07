@@ -5,7 +5,7 @@ import {
   PlayerForm,
   CustomPointer,
   VictoryScreen,
-  Spinner
+  Spinner,
 } from "@masewe/components";
 import { BackgroundBanner } from "@masewe/components";
 import "./HomePage.css";
@@ -14,7 +14,6 @@ import { useConfigContext } from "../hooks/useConfigContext";
 import { useApiContext } from "../hooks/useApiContext";
 
 import { useState, useEffect } from "react";
-
 
 export default function HomePage() {
   const {
@@ -70,11 +69,17 @@ export default function HomePage() {
 
       {winner && (
         <>
-          <VictoryScreen
-            player={winner}
-            onEnter={setHidePointer}
-            playAgain={playAgain}
-          />
+          <VictoryScreen player={winner} onEnter={setHidePointer}>
+            <>
+              <Button type="button" text="Quit" handleClick={resetGame} />
+              <Button
+                type="button"
+                text="Play again?"
+                style="primary"
+                handleClick={playAgain}
+              />
+            </>
+          </VictoryScreen>
         </>
       )}
 
@@ -93,7 +98,6 @@ export default function HomePage() {
         toggleModal={toggleModal}
       >
         <PlayerForm
-          toggleModal={toggleModal}
           startGame={startGame}
           gameState={gameState}
           players={players}
@@ -107,8 +111,13 @@ export default function HomePage() {
           )}
           {gameState === "playing" && (
             <>
-              <Button text="quit" icon="▶|" />
-              <Button text="restart" icon="⟳" handleClick={resetGame} />
+              <Button text="quit" icon="▶|" handleClick={resetGame} />
+              <Button
+                type="button"
+                text="restart"
+                icon="⟳"
+                handleClick={playAgain}
+              />
               <Button
                 type="button"
                 text="resume"
@@ -136,7 +145,12 @@ export default function HomePage() {
           onPointerEnter={() => setHidePointer(true)}
           onPointerLeave={() => setHidePointer(false)}
         >
-          <Button draggable={true} icon="☰" text="menu" handleClick={openMenu} />
+          <Button
+            draggable={true}
+            icon="☰"
+            text="menu"
+            handleClick={openMenu}
+          />
         </div>
       )}
     </div>

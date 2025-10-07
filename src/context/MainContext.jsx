@@ -2,21 +2,23 @@ import { createContext, useState, useEffect } from "react";
 import { useApiContext } from "../hooks/useApiContext";
 
 const MainContext = createContext(null);
-
+const INITIAL_PLAYERS = {
+  1: { name: "Black", id: 0 },
+  2: { name: "White", id: 1 },
+};
 function MainProvider({ children }) {
   const { playPiece, createGame, createPlayer, joinGame, setWinner } =
     useApiContext();
 
-  const [players, setPlayers] = useState({
-    1: { name: "Black", id: 0 },
-    2: { name: "White", id: 1 },
-  });
+  const [players, setPlayers] = useState(INITIAL_PLAYERS);
+  //Could take in get localStorage instead of INITIAL_PLAYERS
+
   const [playerTurn, setPlayerTurn] = useState(1);
   const [gameState, setGameState] = useState("menu");
   const [openModal, setOpenModal] = useState(true);
   const [gameId, setGameId] = useState(true);
   const [resetBoard, setResetBoard] = useState(false);
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(true);
   const toggleModal = (e) => {
     e.stopPropagation();
     setOpenModal(!openModal);
@@ -26,13 +28,8 @@ function MainProvider({ children }) {
   const openMenu = () => setOpenModal(true);
 
   useEffect(() => {
-    console.log("MainProvider mounted");
-  }, []);
-
-  useEffect(() => {
     localStorage.setItem("players", JSON.stringify(players));
-    }, [players]);
-
+  }, [players]);
 
   const getPlayerId = (i) => {
     return players[i].id;
@@ -43,8 +40,8 @@ function MainProvider({ children }) {
     const gameId = await createGame();
     setGameId(gameId);
 
-    const player1 = players[1].id;
-    const player2 = players[2].id;
+    let player1 = players[1].id;
+    let player2 = players[2].id;
 
     await joinGame(gameId, player1);
     await joinGame(gameId, player2);
@@ -53,6 +50,7 @@ function MainProvider({ children }) {
     setPlayerTurn(1);
     setGameState("playing");
     setResetBoard(false);
+    closeMenu();
   };
 
   async function startGame({ p1, p2 }) {
@@ -75,7 +73,7 @@ function MainProvider({ children }) {
 
     setPlayerTurn(1);
     setGameState("playing");
-
+    setShowForm(false);
     closeMenu();
   }
 
@@ -87,11 +85,20 @@ function MainProvider({ children }) {
   };
 
   const resetGame = () => {
+    setResetBoard(true);
+
+    setWinner("");
+    setGameId(null);
+    setPlayers(INITIAL_PLAYERS);
+    setPlayerTurn(1);
+
+    setGameState("menu");
     setShowForm(true);
     setOpenModal(true);
-    setGameId(null);
-    setWinner("");
-    playAgain();
+
+    queueMicrotask(() => setResetBoard(false));
+    //queueMicrotask acts like a .then in a fetch, it runs last in the callstack
+    //Could or should or would have used a setTimeOut but who cares
   };
 
   return (
