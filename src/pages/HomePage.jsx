@@ -38,9 +38,9 @@ export default function HomePage() {
   const [hidePointer, setHidePointer] = useState(false);
   const [loading, setLoading] = useState(true); // ← new loading state
 
-  // Show spinner for 5 seconds
+  // Show spinner for 1.7 seconds
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
+    const timer = setTimeout(() => setLoading(false), 1700);
     return () => clearTimeout(timer);
   }, []);
 

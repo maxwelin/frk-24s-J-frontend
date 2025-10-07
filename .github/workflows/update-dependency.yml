@@ -1,0 +1,29 @@
+name: Uppdatera @masewe/components vid release
+
+on:
+  repository_dispatch:
+    types: [npm-package-updated]
+
+jobs:
+  update-dependency:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install @masewe/components@${{ github.event.client_payload.version }}
+        run: npm install @masewe/components@${{ github.event.client_payload.version }}
+
+      - name: Commit och pusha uppdatering
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add package.json package-lock.json
+          git commit -m "Uppdatera @masewe/components till v${{ github.event.client_payload.version }} [skip ci]" || echo "Inga ändringar"
+          git push
